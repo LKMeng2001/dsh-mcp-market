@@ -1,7 +1,7 @@
 {
   "name": "dsh-mcp-market",
   "description": "MCP server marketplace for DeepSeek Harness: browse a curated catalog of MCP servers and install them into the running profile with one click (powered by @deepseek-ai/dsh-mcp-client).",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "type": "module",
   "main": "lib/index.js",
   "types": "lib/types/index.d.ts",

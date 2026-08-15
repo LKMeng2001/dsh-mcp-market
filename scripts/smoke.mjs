@@ -101,6 +101,32 @@ next = withManagedEntries(next, (entries) => {
 })
 check('remove last entry restores empty []', next.trim() === '[]')
 
+// --- 8. regression: header comments + [] base (#empty-config bug) ----------
+// A real profile patch is header comments + `[]`; the managed block must
+// REPLACE the `[]` (not append after it), or the file becomes invalid YAML
+// and configs silently stop round-tripping (empty edit forms).
+const headerBase = `# my patch header
+# more comment
+[]
+`
+next = withManagedEntries(headerBase, (entries) => {
+  entries.push({ id: 'mcp-git', name: MCP_CLIENT_PACKAGE, config: { serverName: 'git', transport: 'stdio', command: 'npx', args: ['-y', 'git-mcp'] }, disabled: false })
+})
+check('header+[] install keeps header, drops []', next.includes('# my patch header') && !next.includes('\n[]'))
+check('header+[] install yields valid YAML', (() => { try { yaml.load(next); return true } catch { return false } })())
+instances = parseMcpInstances(next)
+check('config round-trips after header+[] install', instances.length === 1 && Object.keys(instances[0].config).length === 4)
+next = withManagedEntries(next, (entries) => {
+  const index = entries.findIndex((e) => e.id === 'mcp-git')
+  if (index !== -1) entries.splice(index, 1)
+})
+check('remove restores header + []', next.trim() === '# my patch header\n# more comment\n[]')
+// And with only comments (no []) the block still lands cleanly.
+next = withManagedEntries('# only comments\n', (entries) => {
+  entries.push({ id: 'mcp-x', name: MCP_CLIENT_PACKAGE, config: { serverName: 'x', transport: 'stdio', command: 'npx' }, disabled: false })
+})
+check('comments-only base install yields valid YAML', (() => { try { yaml.load(next); return true } catch { return false } })())
+
 rmSync(home, { recursive: true, force: true })
 console.log(failures === 0 ? '\nALL CHECKS PASSED' : `\n${failures} CHECK(S) FAILED`)
 process.exit(failures === 0 ? 0 : 1)

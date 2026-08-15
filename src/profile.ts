@@ -103,8 +103,7 @@ export function parseManagedEntries(text: string): ManagedEntry[] {
 
 /** Render the managed block from its entries (as YAML array rows). */
 function renderManagedBlock(entries: ManagedEntry[]): string {
-  const lines: string[] = []
-  lines.push('', MANAGED_HEAD)
+  const lines: string[] = [MANAGED_HEAD]
   for (const entry of entries) {
     lines.push(yaml.dump([{ insert: [{ id: entry.id, name: entry.name, config: entry.config }] }], {
       lineWidth: 160,
@@ -114,25 +113,30 @@ function renderManagedBlock(entries: ManagedEntry[]): string {
       lines.push(yaml.dump([{ id: entry.id, disabled: true }], { noRefs: true }).trimEnd())
     }
   }
-  lines.push(MANAGED_TAIL, '')
-  return lines.join('\n')
+  lines.push(MANAGED_TAIL)
+  return `${lines.join('\n')}\n`
 }
 
 /**
  * Return a new patch text with the managed entries mutated by `mutate`.
- * Non-managed user content is preserved verbatim. When the file is empty or
- * a bare `[]`, the managed block becomes the whole document.
+ * Non-managed user content is preserved verbatim. When the base is empty —
+ * including a header made of comments plus an empty `[]` — the managed block
+ * replaces the `[]` (appending after a flow sequence would produce invalid
+ * YAML and silently disable config round-tripping).
  */
 export function withManagedEntries(text: string, mutate: (entries: ManagedEntry[]) => void): string {
   const entries = parseManagedEntries(text)
   mutate(entries)
   const rest = stripManagedBlock(text).trimEnd().replace(/\n+$/, '')
-  const emptyBase = rest === '' || rest === '[]' || rest === '---'
+  const headerLines = rest.split('\n').filter((line) => /^\s*#/.test(line))
+  const effective = rest.replace(/^\s*#.*$/gm, '').trim()
+  const emptyBase = effective === '' || effective === '[]' || effective === '---'
+  const header = headerLines.length > 0 ? `${headerLines.join('\n')}\n` : ''
   if (emptyBase) {
-    if (entries.length === 0) return '[]\n'
-    return renderManagedBlock(entries).replace(/^\n/, '')
+    if (entries.length === 0) return `${header}[]\n`
+    return header + renderManagedBlock(entries)
   }
-  return rest + renderManagedBlock(entries)
+  return `${rest}\n${renderManagedBlock(entries)}`
 }
 
 /**
