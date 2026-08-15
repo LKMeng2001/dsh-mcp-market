@@ -38,7 +38,7 @@ After changes: `npm run build`, restart `dsh web` (host changes; client changes 
 
 ## Registry source
 
-Fetched from `https://mcp-market.dshapp.dev/servers.json` by default, falling back to `data/registry-snapshot.json`. Override per profile via the plugin config (`registryUrl`) or just maintain the bundled snapshot. Entry schema and the HTTP route/loader design are documented in [README.zh.md](README.zh.md).
+Live catalog: fetched from the GitHub Pages URL `https://LKMeng2001.github.io/dsh-mcp-market/servers.json` (canonical source is `docs/servers.json` in this repo — edit and push to update globally, no release needed), falling back to the bundled `data/registry-snapshot.json` (generated from `docs/servers.json` by `npm run sync:catalog`). A CI workflow checks every npm package in the catalog daily. Override per profile via the plugin config (`registryUrl`). Entry schema and the HTTP route/loader design are documented in [README.zh.md](README.zh.md).
 
 ## Security
 

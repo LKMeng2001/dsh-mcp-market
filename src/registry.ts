@@ -10,8 +10,9 @@ import { fileURLToPath } from 'node:url'
 import { checkNpmPackage } from './npm.js'
 import type { Registry } from './types.js'
 
-/** Default catalog endpoint; replace with your own hosted servers.json. */
-export const DEFAULT_REGISTRY_URL = 'https://mcp-market.dshapp.dev/servers.json'
+/** Default catalog endpoint: the live servers.json hosted on GitHub Pages
+ * (kept in sync with the bundled snapshot by scripts/sync-catalog.mjs). */
+export const DEFAULT_REGISTRY_URL = 'https://LKMeng2001.github.io/dsh-mcp-market/servers.json'
 const TTL_MS = 60 * 60 * 1000
 
 let cache: { at: number; data: Registry } | null = null

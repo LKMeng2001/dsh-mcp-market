@@ -45,10 +45,13 @@ npm run typecheck    # 两端类型检查
 
 ## 目录数据源
 
-默认从 `https://mcp-market.dshapp.dev/servers.json` 拉取，失败时回退到内置 `data/registry-snapshot.json`。可以：
+**活目录**：默认从 GitHub Pages 托管地址 `https://LKMeng2001.github.io/dsh-mcp-market/servers.json` 拉取（仓库里 `docs/servers.json` 是唯一权威源，改它并 push 即全局生效，无需发版）；拉取失败时回退到内置 `data/registry-snapshot.json`（由 `npm run sync:catalog` 从 `docs/servers.json` 同步生成）。
 
-- 通过 host 配置覆盖 URL（见下）；
-- 直接把 `data/registry-snapshot.json` 当成目录源维护，发布新版本即可。
+目录维护：
+
+- 加/改服务器：编辑 `docs/servers.json` → `git push` → 1 小时后（缓存）所有用户可见；
+- 防失效：CI 每天自动校验每个 npm 包是否存在（`.github/workflows/catalog-check.yml`），缺失会标红失败；
+- 也可通过 host 配置覆盖 URL（见下）。
 
 条目 schema：
 

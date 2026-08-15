@@ -1,7 +1,7 @@
 {
   "name": "dsh-mcp-market",
   "description": "MCP server marketplace for DeepSeek Harness: browse a curated catalog of MCP servers and install them into the running profile with one click (powered by @deepseek-ai/dsh-mcp-client).",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "type": "module",
   "main": "lib/index.js",
   "types": "lib/types/index.d.ts",
@@ -22,7 +22,9 @@
   ],
   "scripts": {
     "typecheck": "tsc -p tsconfig.json --noEmit && tsc -p tsconfig.client.json --noEmit",
-    "build": "tsc -p tsconfig.json && node scripts/build-client.mjs",
+    "sync:catalog": "node scripts/sync-catalog.mjs",
+    "check:catalog": "node scripts/check-catalog.mjs",
+    "build": "node scripts/sync-catalog.mjs && tsc -p tsconfig.json && node scripts/build-client.mjs",
     "check": "npm run typecheck && npm run build",
     "prepack": "npm run build"
   },

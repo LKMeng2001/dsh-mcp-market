@@ -1,0 +1,22 @@
+name: catalog-check
+
+on:
+  schedule:
+    # Daily at 02:17 UTC — catches packages that disappear from the registry.
+    - cron: '17 2 * * *'
+  pull_request:
+    paths:
+      - 'docs/servers.json'
+      - 'scripts/check-catalog.mjs'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify npm packages exist
+        run: node scripts/check-catalog.mjs
