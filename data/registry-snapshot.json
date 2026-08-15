@@ -1,0 +1,270 @@
+{
+  "name": "dsh-mcp-market-catalog",
+  "url": "https://github.com/<your-org>/dsh-mcp-market",
+  "updated": "2026-08-15",
+  "count": 15,
+  "categories": {
+    "dev": { "en": "Development", "zh": "开发" },
+    "data": { "en": "Data & Storage", "zh": "数据与存储" },
+    "search": { "en": "Search & Web", "zh": "搜索与网络" },
+    "ai": { "en": "AI & Memory", "zh": "AI 与记忆" },
+    "misc": { "en": "Miscellaneous", "zh": "其他" }
+  },
+  "servers": [
+    {
+      "name": "everything",
+      "category": "dev",
+      "description": {
+        "en": "Reference server exercising every MCP feature; great for smoke-testing the bridge.",
+        "zh": "覆盖 MCP 全部特性的参考服务器，适合用来冒烟测试接入。"
+      },
+      "homepage": "https://github.com/modelcontextprotocol/servers",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-everything"],
+      "npmPackage": "@modelcontextprotocol/server-everything",
+      "env": {},
+      "envHint": [],
+      "tags": ["test", "reference"],
+      "added": "2026-08-14"
+    },
+    {
+      "name": "filesystem",
+      "category": "data",
+      "description": {
+        "en": "Filesystem access restricted to allow-listed directories (edit the args to your own paths).",
+        "zh": "受限目录的文件系统访问（请把 args 里的路径改成你自己的目录）。"
+      },
+      "homepage": "https://github.com/modelcontextprotocol/servers",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "/tmp"],
+      "npmPackage": "@modelcontextprotocol/server-filesystem",
+      "env": {},
+      "envHint": [],
+      "tags": ["files", "local"],
+      "added": "2026-08-14"
+    },
+    {
+      "name": "git",
+      "category": "dev",
+      "description": {
+        "en": "Natural-language Git operations: commit, branch, reset, revert and more (36 tools).",
+        "zh": "自然语言操作 Git：提交、分支、回滚、撤销等（36 个工具）。"
+      },
+      "homepage": "https://github.com/idootop/git-mcp",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "git-mcp"],
+      "npmPackage": "git-mcp",
+      "env": {},
+      "envHint": [],
+      "tags": ["git", "vcs"],
+      "added": "2026-08-15"
+    },
+    {
+      "name": "github",
+      "category": "dev",
+      "description": {
+        "en": "GitHub API access: issues, PRs, repos, search (requires a GITHUB_TOKEN).",
+        "zh": "GitHub API 访问：issue、PR、仓库、搜索（需要 GITHUB_TOKEN）。"
+      },
+      "homepage": "https://github.com/modelcontextprotocol/servers",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "npmPackage": "@modelcontextprotocol/server-github",
+      "env": {},
+      "envHint": ["GITHUB_TOKEN"],
+      "tags": ["github", "api"],
+      "added": "2026-08-14"
+    },
+    {
+      "name": "google-maps",
+      "category": "search",
+      "description": {
+        "en": "Google Maps API: geocoding, places, directions (requires GOOGLE_MAPS_API_KEY).",
+        "zh": "Google Maps API：地理编码、地点、路线（需要 GOOGLE_MAPS_API_KEY）。"
+      },
+      "homepage": "https://github.com/modelcontextprotocol/servers",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-google-maps"],
+      "npmPackage": "@modelcontextprotocol/server-google-maps",
+      "env": {},
+      "envHint": ["GOOGLE_MAPS_API_KEY"],
+      "tags": ["maps", "geo"],
+      "added": "2026-08-14"
+    },
+    {
+      "name": "fetch",
+      "category": "search",
+      "description": {
+        "en": "Web research: Google search, visit pages, screenshots (3 tools, no API key).",
+        "zh": "网络研究：Google 搜索、访问网页、截图（3 个工具，无需密钥）。"
+      },
+      "homepage": "https://github.com/mzxrai/mcp-webresearch",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@mzxrai/mcp-webresearch"],
+      "npmPackage": "@mzxrai/mcp-webresearch",
+      "env": {},
+      "envHint": [],
+      "tags": ["web", "search"],
+      "added": "2026-08-15"
+    },
+    {
+      "name": "memory",
+      "category": "ai",
+      "description": {
+        "en": "Knowledge-graph based persistent memory for agents.",
+        "zh": "基于知识图谱的 Agent 持久记忆。"
+      },
+      "homepage": "https://github.com/modelcontextprotocol/servers",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-memory"],
+      "npmPackage": "@modelcontextprotocol/server-memory",
+      "env": {},
+      "envHint": [],
+      "tags": ["memory", "knowledge"],
+      "added": "2026-08-14"
+    },
+    {
+      "name": "sequential-thinking",
+      "category": "ai",
+      "description": {
+        "en": "Structured, revisable chain-of-thought tool for deep problem solving.",
+        "zh": "结构化、可回溯的思维链工具，用于深度问题求解。"
+      },
+      "homepage": "https://github.com/modelcontextprotocol/servers",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"],
+      "npmPackage": "@modelcontextprotocol/server-sequential-thinking",
+      "env": {},
+      "envHint": [],
+      "tags": ["reasoning", "cot"],
+      "added": "2026-08-14"
+    },
+    {
+      "name": "puppeteer",
+      "category": "dev",
+      "description": {
+        "en": "Browser automation via Puppeteer: navigate, click, screenshot (downloads Chromium on first run).",
+        "zh": "基于 Puppeteer 的浏览器自动化：导航、点击、截图（首次运行会下载 Chromium）。"
+      },
+      "homepage": "https://github.com/modelcontextprotocol/servers",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-puppeteer"],
+      "npmPackage": "@modelcontextprotocol/server-puppeteer",
+      "env": {},
+      "envHint": [],
+      "tags": ["browser", "automation"],
+      "added": "2026-08-14"
+    },
+    {
+      "name": "playwright",
+      "category": "dev",
+      "description": {
+        "en": "Browser automation via Playwright (downloads browsers on first run).",
+        "zh": "基于 Playwright 的浏览器自动化（首次运行会下载浏览器）。"
+      },
+      "homepage": "https://github.com/microsoft/playwright-mcp",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@playwright/mcp@latest"],
+      "npmPackage": "@playwright/mcp",
+      "env": {},
+      "envHint": [],
+      "tags": ["browser", "automation"],
+      "added": "2026-08-14"
+    },
+    {
+      "name": "slack",
+      "category": "misc",
+      "description": {
+        "en": "Slack workspace API: messages, channels, threads (requires SLACK_BOT_TOKEN and SLACK_TEAM_ID).",
+        "zh": "Slack 工作区 API：消息、频道、线程（需要 SLACK_BOT_TOKEN 与 SLACK_TEAM_ID）。"
+      },
+      "homepage": "https://github.com/modelcontextprotocol/servers",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-slack"],
+      "npmPackage": "@modelcontextprotocol/server-slack",
+      "env": {},
+      "envHint": ["SLACK_BOT_TOKEN", "SLACK_TEAM_ID"],
+      "tags": ["slack", "chat"],
+      "added": "2026-08-14"
+    },
+    {
+      "name": "sqlite",
+      "category": "data",
+      "description": {
+        "en": "SQLite database operations via a maintained community server (default ./data.db).",
+        "zh": "社区维护的 SQLite 数据库操作服务器（默认 ./data.db）。"
+      },
+      "homepage": "https://github.com/madnh/mcp-server-sqlite",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "mcp-server-sqlite"],
+      "npmPackage": "mcp-server-sqlite",
+      "env": {},
+      "envHint": [],
+      "tags": ["database", "sql"],
+      "added": "2026-08-15"
+    },
+    {
+      "name": "brave-search",
+      "category": "search",
+      "description": {
+        "en": "Web search via the Brave Search API (requires BRAVE_API_KEY).",
+        "zh": "基于 Brave Search API 的网页搜索（需要 BRAVE_API_KEY）。"
+      },
+      "homepage": "https://github.com/modelcontextprotocol/servers",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-brave-search"],
+      "npmPackage": "@modelcontextprotocol/server-brave-search",
+      "env": {},
+      "envHint": ["BRAVE_API_KEY"],
+      "tags": ["search"],
+      "added": "2026-08-14"
+    },
+    {
+      "name": "redis",
+      "category": "data",
+      "description": {
+        "en": "Redis database operations (requires REDIS_URL).",
+        "zh": "Redis 数据库操作（需要 REDIS_URL）。"
+      },
+      "homepage": "https://github.com/redis/mcp-redis",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-redis"],
+      "npmPackage": "@modelcontextprotocol/server-redis",
+      "env": {},
+      "envHint": ["REDIS_URL"],
+      "tags": ["database", "redis"],
+      "added": "2026-08-14"
+    },
+    {
+      "name": "context7",
+      "category": "search",
+      "description": {
+        "en": "Up-to-date library documentation for any dependency, injected on demand.",
+        "zh": "按需注入任意依赖库的最新文档。"
+      },
+      "homepage": "https://github.com/upstash/context7",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@upstash/context7-mcp"],
+      "npmPackage": "@upstash/context7-mcp",
+      "env": {},
+      "envHint": [],
+      "tags": ["docs", "libraries"],
+      "added": "2026-08-14"
+    }
+  ]
+}

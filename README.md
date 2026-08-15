@@ -1,0 +1,51 @@
+# dsh-mcp-market
+
+[中文](README.zh.md) | English
+
+An **MCP server marketplace** inside DeepSeek Harness: browse a curated catalog and install MCP servers into the running profile with one click — **live, no restart** (powered by the official `@deepseek-ai/dsh-mcp-client` and the loader service).
+
+Open **Settings → MCP Market**, search, click, done. The model immediately sees `mcp__<serverName>__<tool>` tools.
+
+## Features
+
+- Browse / search / filter a bundled catalog (15 servers, every one verified usable), zh/en descriptions
+- npm existence verification: every stdio entry is checked against registry.npmjs.org at load time; packages removed from the registry are greyed out and blocked from install (guards against dead entries and typosquat canaries)
+- One-click install for `stdio` (local process) and `streamable-http` (remote URL); fill in command / args / env / url / headers before installing
+- Hot activation via `ctx.loader.create()` — no restart; config persists across restarts
+- Installed list with enable/disable, config edit (HMR reconnect), and uninstall
+- Manual "add a server" form for anything not in the catalog
+- Offline fallback: remote registry JSON with an in-memory cache and a bundled snapshot
+- Clean persistence: installs only touch a `# --- dsh-mcp-market managed ---` block in the profile's `cordis.patch.yml`; your own edits are preserved verbatim
+
+## Install
+
+```sh
+dsh plugin --profile web add dsh-mcp-market        # from npm
+dsh plugin --profile web add D:\code\harness\dsh-mcp-market   # local dev dir
+```
+
+Restart `dsh web`, then open **Settings → MCP Market**.
+
+## Development
+
+```sh
+npm install
+npm run build        # tsc host → lib/, esbuild client → client/client.js
+npm run typecheck
+```
+
+After changes: `npm run build`, restart `dsh web` (host changes; client changes can use a dev watcher).
+
+## Registry source
+
+Fetched from `https://mcp-market.dshapp.dev/servers.json` by default, falling back to `data/registry-snapshot.json`. Override per profile via the plugin config (`registryUrl`) or just maintain the bundled snapshot. Entry schema and the HTTP route/loader design are documented in [README.zh.md](README.zh.md).
+
+## Security
+
+- Every mutating route is a **same-origin POST** with Origin checks
+- MCP servers are third-party code/services: stdio servers spawn a local child process — install only sources you trust
+- Config (incl. env) is stored in plaintext in the profile's `cordis.patch.yml`; keep secrets out or encrypt before writing
+
+## License
+
+MIT

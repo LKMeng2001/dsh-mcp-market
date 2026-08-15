@@ -1,0 +1,6 @@
+node_modules/
+lib/
+client/client.js
+client/client.js.map
+*.tsbuildinfo
+*.log
