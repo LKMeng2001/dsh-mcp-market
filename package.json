@@ -8,9 +8,9 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/<your-org>/dsh-mcp-market.git"
+    "url": "git+https://github.com/LKMeng2001/dsh-mcp-market.git"
   },
-  "homepage": "https://github.com/<your-org>/dsh-mcp-market",
+  "homepage": "https://github.com/LKMeng2001/dsh-mcp-market",
   "keywords": [
     "deepseek",
     "harness",
