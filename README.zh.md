@@ -20,10 +20,17 @@
 ## 安装
 
 ```sh
-# 发布到 npm 之后
+# 从 npm 安装（所有人通用）
 dsh plugin --profile web add dsh-mcp-market
-# 或本地开发目录直接装
-dsh plugin --profile web add D:\code\harness\dsh-mcp-market
+
+# 或从本地开发目录安装（仅供你自己开发调试，路径换成你的实际目录）
+dsh plugin --profile web add "D:\path\to\dsh-mcp-market"
+
+# 更新到最新版
+dsh plugin --profile web update dsh-mcp-market
+
+# 卸载
+dsh plugin --profile web remove dsh-mcp-market
 ```
 
 重启 `dsh web`，打开 **设置 → MCP 商场**。

@@ -20,8 +20,17 @@ Open **Settings → MCP Market**, search, click, done. The model immediately see
 ## Install
 
 ```sh
-dsh plugin --profile web add dsh-mcp-market        # from npm
-dsh plugin --profile web add D:\code\harness\dsh-mcp-market   # local dev dir
+# from npm (for everyone)
+dsh plugin --profile web add dsh-mcp-market
+
+# from a local checkout (dev only — replace the path with yours)
+dsh plugin --profile web add "D:\path\to\dsh-mcp-market"
+
+# update
+dsh plugin --profile web update dsh-mcp-market
+
+# remove
+dsh plugin --profile web remove dsh-mcp-market
 ```
 
 Restart `dsh web`, then open **Settings → MCP Market**.
