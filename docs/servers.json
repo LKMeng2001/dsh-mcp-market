@@ -2,7 +2,7 @@
   "name": "dsh-mcp-market-catalog",
   "url": "https://github.com/LKMeng2001/dsh-mcp-market",
   "updated": "2026-08-15",
-  "count": 15,
+  "count": 16,
   "categories": {
     "dev": { "en": "Development", "zh": "开发" },
     "data": { "en": "Data & Storage", "zh": "数据与存储" },
@@ -265,6 +265,29 @@
       "envHint": [],
       "tags": ["docs", "libraries"],
       "added": "2026-08-14"
+    },
+    {
+      "name": "lastdatabase",
+      "category": "data",
+      "description": {
+        "en": "Connect to LastDatabase for B2B contact and consumer email lead discovery through a remote MCP server. Requires a LastDatabase account and OAuth 2.0 authentication.",
+        "zh": "通过远程 MCP 服务器连接 LastDatabase，搜索 B2B 联系人和消费者电子邮件潜在客户。需要 LastDatabase 账户和 OAuth 2.0 身份验证。"
+      },
+      "homepage": "https://github.com/lastdatabaseph/lastdatabase-developer",
+      "transport": "streamable-http",
+      "url": "https://lastdatabase.com/mcp",
+      "headers": {},
+      "placeholder": false,
+      "tags": [
+        "lastdatabase",
+        "b2b",
+        "lead-generation",
+        "sales",
+        "crm",
+        "contact-data",
+        "oauth"
+      ],
+      "added": "2026-10-16"
     }
   ]
 }
